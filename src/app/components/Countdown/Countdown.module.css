@@ -1,0 +1,14 @@
+.root {
+	text-align: center;
+}
+
+.form {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.timer {
+	font-size: 20rem;
+	font-family: monospace;
+}

@@ -14,7 +14,6 @@ export default function EditableListbox({ id, onChange = () => {} }) {
 
     useEffect(() => {
         localStorage.setItem(id, JSON.stringify(options));
-
         onChange(options);
     }, [options]);
 

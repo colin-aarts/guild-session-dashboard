@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./GroupRandomiser.module.css";
 
 // Components
@@ -13,7 +13,18 @@ export default function GroupRandomiser({ teamNames = [] }) {
         setNames(names);
     };
 
-    const onClickRandomise = () => {
+    const onClickRandomise = () => randomise();
+
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+
+        return array;
+    };
+
+    const randomise = () => {
         const teamSize = Math.floor(names.length / teamCount);
         const randomisedNames = shuffleArray([...names]);
         const randomisedTeams = [...Array(teamCount)].map((_, index) => {
@@ -25,14 +36,19 @@ export default function GroupRandomiser({ teamNames = [] }) {
         setTeams(randomisedTeams.reverse());
     };
 
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
+    useEffect(() => {
+        const handler = (event) => {
+            if (
+                event.key === "Enter" &&
+                !(document.activeElement instanceof HTMLButtonElement) &&
+                !(document.activeElement instanceof HTMLInputElement)
+            )
+                randomise();
+        };
 
-        return array;
-    };
+        document.addEventListener("keydown", handler);
+        return () => document.removeEventListener("keydown", handler);
+    }, [randomise]);
 
     return (
         <div className={s.root}>
