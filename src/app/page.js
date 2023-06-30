@@ -9,7 +9,7 @@ import Countdown from "@/app/components/Countdown/Countdown.jsx";
 export default function Home() {
     return (
         <main className={styles.main}>
-            <GroupRandomiser teamNames={["Pokémon", "Lego", "Pride", "Space"]}></GroupRandomiser>
+            <GroupRandomiser teamNames={["Pokémon 🦕", "Lego 🧱", "Pride 🌈", "Space 🚀"]}></GroupRandomiser>
             <Countdown></Countdown>
         </main>
     );
